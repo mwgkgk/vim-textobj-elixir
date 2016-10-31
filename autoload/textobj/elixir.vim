@@ -4,12 +4,12 @@ set cpo&vim
 " helpers for syntax
 function! s:syntax_from_block(block) "{{{
     for [syntax, names] in items({
-                \   'rubyConditional' : ['if', 'unless', 'case'],
-                \   'rubyRepeat'      : ['while', 'until', 'for'],
-                \   'rubyModule'      : ['module'],
-                \   'rubyClass'       : ['class'],
-                \   'rubyControl'     : ['do', 'begin'],
-                \   'rubyDefine'      : ['def'],
+                \   'elixirConditional' : ['if', 'unless', 'case'],
+                \   'elixirRepeat'      : ['while', 'until', 'for'],
+                \   'elixirModule'      : ['module'],
+                \   'elixirClass'       : ['class'],
+                \   'elixirControl'     : ['do', 'begin'],
+                \   'elixirDefine'      : ['def'],
                 \ })
         if index(names, a:block) >= 0
             return syntax
@@ -92,51 +92,51 @@ endfunction
 "}}}
 
 " select any block
-function! textobj#ruby#any_select_i() " {{{
+function! textobj#elixir#any_select_i() " {{{
     return s:inside(s:search_block('if\|unless\|case\|while\|until\|for\|def\|module\|class\|do\|begin'))
 endfunction
 
-function! textobj#ruby#any_select_a()
+function! textobj#elixir#any_select_a()
     return s:search_block('if\|unless\|case\|while\|until\|for\|def\|module\|class\|do\|begin')
 endfunction
 "}}}
 
 " select object definition
-function! textobj#ruby#object_definition_select_i() "{{{
+function! textobj#elixir#object_definition_select_i() "{{{
     return s:inside(s:search_block('module\|class\|def'))
 endfunction
 
-function! textobj#ruby#object_definition_select_a()
+function! textobj#elixir#object_definition_select_a()
     return s:search_block('module\|class\|def')
 endfunction
 "}}}
 
 " select loop
-function! textobj#ruby#loop_block_select_i() " {{{
+function! textobj#elixir#loop_block_select_i() " {{{
     return s:inside(s:search_block('while\|until\|for'))
 endfunction
 
-function! textobj#ruby#loop_block_select_a()
+function! textobj#elixir#loop_block_select_a()
     return s:search_block('while\|until\|for')
 endfunction
 "}}}
 
 " select control statement
-function! textobj#ruby#control_block_select_i() " {{{
+function! textobj#elixir#control_block_select_i() " {{{
     return s:inside(s:search_block('do\|begin\|if\|unless\|case'))
 endfunction
 
-function! textobj#ruby#control_block_select_a()
+function! textobj#elixir#control_block_select_a()
     return s:search_block('do\|begin\|if\|unless\|case')
 endfunction
 "}}}
 
 " select do block
-function! textobj#ruby#do_block_select_i() " {{{
+function! textobj#elixir#do_block_select_i() " {{{
     return s:inside(s:search_block('do'))
 endfunction
 
-function! textobj#ruby#do_block_select_a()
+function! textobj#elixir#do_block_select_a()
     return s:search_block('do')
 endfunction
 "}}}

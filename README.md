@@ -1,6 +1,6 @@
-# Make text objects with various ruby block structures
+# Make text objects with various elixir block structures
 
-This Vim plugin makes text objects with various ruby block structures.
+This Vim plugin makes text objects with various elixir block structures.
 Many end-terminated blocks are parsed using regex, indentation and syntax highlight.
 This is more correct than parsing text with regex only.
 
@@ -13,8 +13,8 @@ Example:
 
 `#\%` is the place of your cursor.
 
-```ruby
-def hoge(yo)
+```elixir
+def hoge(yo) do
     if yo
         puts "yo!"
         #\%
@@ -25,8 +25,8 @@ end
 
 Typing `dar` removes whole `if` block
 
-```ruby
-def hoge(yo)
+```elixir
+def hoge(yo) do
     #\%
     puts "everyone!"
 end
@@ -34,8 +34,8 @@ end
 
 or `dir` removes innner `if` block.
 
-```ruby
-def hoge(yo)
+```elixir
+def hoge(yo) do
     if yo
     #\%
     end
@@ -44,8 +44,8 @@ end
 
 When a cursor places at line 6,
 
-```ruby
-def hoge(yo)
+```elixir
+def hoge(yo) do
     if yo
         puts "yo!"
         
@@ -56,8 +56,8 @@ end
 
 type `dir` removes inner `def` block.
 
-```ruby
-def hoge(yo)
+```elixir
+def hoge(yo) do
 end
 ```
 
@@ -78,13 +78,13 @@ Only bellow mapping is defined.
 
 This plugin requires [vim-textobj-user](https://github.com/kana/vim-textobj-user)
 
-## Or many operator-pending mappings for Ruby blocks
+## Or many operator-pending mappings for elixir blocks
 
-If you set `g:textobj_ruby_more_mappings` to `1`, more mappings are defined.
-You can specify kinds of Ruby blocks.
+If you set `g:textobj_elixir_more_mappings` to `1`, more mappings are defined.
+You can specify kinds of elixir blocks.
 If you remember all mappings, it will be more convenient.
 
-Combinations of textobjects and Ruby blocks are below.
+Combinations of textobjects and elixir blocks are below.
 
 <table>
     <tr>
