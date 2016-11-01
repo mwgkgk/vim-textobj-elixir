@@ -121,11 +121,6 @@ function! s:search_block(block)
   let pos = getpos('.')
   try
     let indent = s:current_indent()
-    echom "INDENT"
-    echom getline('.')
-    echom cindent('.')
-    echom indent('.')
-    echom indent
     let [syntax, head_indent, head] = s:search_head(a:block, indent)
     call setpos('.', pos)
     let tail = s:search_tail(head_indent)
