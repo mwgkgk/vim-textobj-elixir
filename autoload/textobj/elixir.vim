@@ -25,6 +25,7 @@ let s:terms=[
       \]
 
 " -----------------------------------------------------
+" -- TERM - query / transform term
 
 function! s:term_reg()
   return join(s:term_keys(), '\|')
@@ -46,56 +47,88 @@ function! s:term_keys()
   return acc
 endfunction
 
-function! s:syntax_for(term)
+function! s:syntax_for_term(term)
   return s:term_dict()[a:term]
 endfunction
 
 " -----------------------------------------------------
+" -- INDENT - calculate the line indent
 
-" return the syntax string from the document
-function! s:syntax_highlight(line)
+function! s:find_indent(direction)
+  let pos  = getpos('.')
+  let line = search('[a-zA-A0-9]', a:direction )
+  call setpos('.', pos)
+  if line == 0
+    throw 'not found'
+  endif
+  return indent(line)
+endfunction
+
+function! s:prev_indent()
+  return s:find_indent('bW')
+endfunction
+
+function! s:next_indent()
+  return s:find_indent('W')
+endfunction
+
+function! s:calculate_indent()
+  return max([s:prev_indent(), s:next_indent()])
+endfunction
+
+function! s:current_indent()
+  let line = substitute(getline('.'),' ','', 'g')
+  return empty(line) ? s:calculate_indent() : indent('.')
+endfunction
+
+" -----------------------------------------------------
+" -- SEARCH - search for a text object
+
+function! s:syntax_for_line(line)
   return synIDattr(synID(a:line, col('.'),1), 'name')
 endfunction
 
-" find head position
 function! s:search_head(block, indent) 
   while 1
     let line = search( '\<\%('.a:block.'\)\>', 'bW' )
     if line == 0
       throw 'not found'
     endif
-    let syntax = s:syntax_for(expand('<cword>'))
+    let syntax = s:syntax_for_term(expand('<cword>'))
     if syntax == ''
       throw 'not found'
     endif
     let current_indent = indent('.')
-    if current_indent < a:indent && syntax ==# s:syntax_highlight(line)
+    if current_indent < a:indent && syntax ==# s:syntax_for_line(line)
       return [syntax, current_indent, getpos('.')]
     endif
   endwhile
 endfunction
 
-" find end position
-function! s:search_end(head_indent)
+function! s:search_tail(head_indent)
   while 1
     let line = search('end', 'W')
     if line == 0
       throw 'not found'
     endif
-    if indent('.') == a:head_indent && 'elixirBlockDefinition' ==# s:syntax_highlight(line)
+    if indent('.') == a:head_indent && 'elixirBlockDefinition' ==# s:syntax_for_line(line)
       return getpos('.')
     endif
   endwhile
 endfunction
 
-" search the block's head and end positions
 function! s:search_block(block) 
   let pos = getpos('.')
   try
-    let indent = getline('.') == '' ? cindent('.') : indent('.')
+    let indent = s:current_indent()
+    echom "INDENT"
+    echom getline('.')
+    echom cindent('.')
+    echom indent('.')
+    echom indent
     let [syntax, head_indent, head] = s:search_head(a:block, indent)
     call setpos('.', pos)
-    let tail = s:search_end(head_indent)
+    let tail = s:search_tail(head_indent)
     return ['V', head, tail]
   catch /^not found$/
     echohl Error | echo 'block is not found.' | echohl None
@@ -116,7 +149,9 @@ function! s:inside(range)
   return range
 endfunction
 
-" select any block
+" -----------------------------------------------------
+" -- SELECT - main functions
+
 function! textobj#elixir#any_select_i() 
   return s:inside(s:search_block(s:term_reg()))
 endfunction
