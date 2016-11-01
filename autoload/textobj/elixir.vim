@@ -8,6 +8,7 @@ let s:terms=[
       \ ['describe',    'elixirExUnitMacro'],
       \ ['test',        'elixirExUnitMacro'],
       \ ['unless',      'elixirKeyword'],
+      \ ['quote',       'elixirKeyword'],
       \ ['case',        'elixirKeyword'],
       \ ['cond',        'elixirKeyword'],
       \ ['when',        'elixirKeyword'],

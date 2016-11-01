@@ -1,14 +1,15 @@
 # Make text objects with various elixir block structures
 
-This Vim plugin makes text objects with various elixir block structures.  Many
-end-terminated blocks are parsed using regex, indentation and syntax highlight.
-This is more correct than parsing text with regex only.
+This Vim plugin makes text objects with various elixir block structures.
+Many end-terminated blocks are parsed using regex, indentation and syntax
+highlight.  This is more correct than parsing text with regex only.
 
 ## Simple one operator-pending mapping `e`
 
 Elixir text objects include: 'setup_all', 'setup', 'describe', 'test',
-'unless', 'case', 'cond', 'when', 'with', 'for', 'if', 'defprotocol',
-'defmodule', 'defmacro', 'defmacrop', 'defimpl', 'defp', 'def', 
+'unless', 'quote', 'case', 'cond', 'when', 'with', 'for', 'if',
+'defprotocol', 'defmodule', 'defmacro', 'defmacrop', 'defimpl', 'defp',
+'def'.
 
 Example:
 
