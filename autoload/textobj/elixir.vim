@@ -65,11 +65,11 @@ function! s:find_indent(direction)
 endfunction
 
 function! s:prev_indent()
-  return s:find_indent('bW')
+  return s:find_indent('bW') + 2
 endfunction
 
 function! s:next_indent()
-  return s:find_indent('W')
+  return s:find_indent('W') + 2
 endfunction
 
 function! s:calculate_indent()
