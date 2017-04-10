@@ -4,7 +4,7 @@ This Vim plugin makes text objects with various elixir block structures.
 Many end-terminated blocks are parsed using regex, indentation and syntax
 highlight.  This is more correct than parsing text with regex only.
 
-## Simple one operator-pending mapping `e`
+## Simple one operator-pending mapping `b`
 
 Elixir text objects include: 'setup_all', 'setup', 'describe', 'test',
 'unless', 'quote', 'case', 'cond', 'when', 'with', 'for', 'if',
@@ -25,7 +25,7 @@ def hoge(yo) do
 end
 ```
 
-Typing `dae` removes whole `if` block
+Typing `dab` removes whole `if` block
 
 ```elixir
 def hoge(yo) do
@@ -34,7 +34,7 @@ def hoge(yo) do
 end
 ```
 
-or `die` removes innner `if` block.
+or `dib` removes innner `if` block.
 
 ```elixir
 def hoge(yo) do
@@ -55,7 +55,7 @@ def hoge(yo) do
 end
 ```
 
-type `die` removes inner `def` block.
+type `dib` removes inner `def` block.
 
 ```elixir
 def hoge(yo) do
