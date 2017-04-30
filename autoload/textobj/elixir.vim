@@ -21,7 +21,9 @@ let s:terms=[
       \ ['defmacrop',   'elixirPrivateMacroDefine'],
       \ ['defimpl',     'elixirImplDefine'],
       \ ['defp',        'elixirPrivateDefine'],
-      \ ['def',         'elixirDefine']
+      \ ['def',         'elixirDefine'],
+      \ ['context',     'elixirId'],
+      \ ['it',          'elixirId'] 
       \]
 
 " -----------------------------------------------------

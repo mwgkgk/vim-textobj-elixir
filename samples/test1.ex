@@ -18,6 +18,10 @@ defmodule Test1 do
 
   end
 
+  it empty_function do
+
+  end
+
   test "empty test" do
   
   end
